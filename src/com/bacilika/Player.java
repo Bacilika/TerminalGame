@@ -53,17 +53,15 @@ public class Player {
         return name;
     }
     public void sleep(){
+
         System.out.println("Player went to bed");
+        System.exit(0);
     }
     public void die(){
+
         System.out.println("player died");
+        System.exit(0);
     }
-    public void help(){
-        StringBuilder stringBuilder = new StringBuilder();
-        System.out.println("These are the things you can do:");
-        for (ActionType action : ActionType.values()) {
-            stringBuilder.append(action.toString().toLowerCase()).append(", ");
-        }
-        System.out.println(stringBuilder);
-    }
+
+
 }

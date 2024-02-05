@@ -10,74 +10,74 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class InputAnalyzer {
-    private static Map<String,Integer> stringIntegerHashMap = new HashMap<>(){{
+
+    private static Enum action;
+    private static Enum object;
+    private static int amount;
+    private Player player;
+    public Map<String, Integer> stringIntegerHashMap = new HashMap<>() {{
         put("one", 1);
-        put("two",2);
-        put("three",3);
-        put("four",4);
-        put("five",5);
-        put("six",6);
-        put("seven",7);
+        put("two", 2);
+        put("three", 3);
+        put("four", 4);
+        put("five", 5);
+        put("six", 6);
+        put("seven", 7);
     }};
 
-    private static Map<ActionType,List<String>> actionNames = new HashMap<>() {{
-        put(ActionType.CHOP,List.of("CHOP"));
-        put(ActionType.MINE,List.of("MINE","GATHER STONE"));
-        put(ActionType.CRAFT,List.of("GET"));
-        put(ActionType.VIEWINVENTORY,List.of("CHECK INVENTORY","INVENTORY"));
-        put(ActionType.SLEEP,List.of("go to bed"));
-        put(ActionType.HELP,List.of("help"));
-        put(ActionType.UNKNOWN,List.of("unknown"));
-        put(ActionType.DIE,List.of("commit suicide","end life"));
+    public InputAnalyzer(Player player) {
+        this.player = player;
+    }
+
+    public Map<Enum, List<String>> similarNames = new HashMap<>() {{
+        put(ActionType.CHOP, List.of("CHOP"));
+        put(ActionType.MINE, List.of("MINE", "GATHER STONE"));
+        put(ActionType.CRAFT, List.of("GET"));
+        put(ActionType.INVENTORY, List.of("CHECK INVENTORY", "INVENTORY", "view inventory"));
+        put(ActionType.SLEEP, List.of("go to bed"));
+        put(ObjectType.HELP, List.of("help"));
+        put(ActionType.UNKNOWN, List.of("unknown"));
+        put(ActionType.DIE, List.of("quit"));
+        put(ObjectType.WOOD, List.of("TREE", "PLANK"));
+        put(ObjectType.STONE, List.of());
+        put(ObjectType.AXE, List.of("axe"));
+        put(ObjectType.PICKAXE, List.of("pick", "pickaxe"));
+        put(ObjectType.HOUSE, List.of("go to bed"));
+        put(ActionType.RECIPE, List.of("recipe"));
     }};
 
-    private static Map<ObjectType,List<String>> objectNames = new HashMap<>() {{
-        put(ObjectType.WOOD,List.of("TREE", "PLANK"));
-        put(ObjectType.STONE,List.of());
-        put(ObjectType.AXE,List.of("axe"));
-        put(ObjectType.PICKAXE,List.of("pick","pickaxe"));
-        put(ObjectType.HOUSE,List.of("go to bed"));
-    }};
 
-    private static Map<ObjectType,HashMap<ObjectType,Integer>> objectCrafting = new HashMap<>() {{
-        put(ObjectType.WOOD,null);
-        put(ObjectType.STONE,null);
-        put(ObjectType.AXE,new HashMap<>() {{
-            put(ObjectType.WOOD, 2);
-        }});
-        put(ObjectType.PICKAXE,new HashMap<>() {{
-            put(ObjectType.WOOD, 5);
-        }});
-        put(ObjectType.HOUSE,new HashMap<>() {{
-            put(ObjectType.WOOD, 50);
-            put(ObjectType.STONE,20);
-        }});
-    }};
-
-    public static Action analyzeInput(String input, ActionType actionType, ObjectType objectType, int amountInput){
-
+    public Action analyzeInput(String input, ActionType actionType, ObjectType objectType, int amountInput) {
         String[] inputs = input.split(" ");
-        if(inputs.length == 0){
-            throw new RuntimeException();
+        if (inputs.length == 0) {
+            return null;
         }
-        Enum action = actionType;
-        Enum object = objectType;
-        int amount = amountInput;
+        action = actionType;
+        object = objectType;
+        amount = amountInput;
 
-        if (action == null){ action = findClosestAction(inputs, ActionType.values()); }
-        if(object == null){object = findClosestAction(inputs, ObjectType.values());}
-        if (amountInput == -1){ amount = isInteger(inputs);}
+        if (action == null) {
+            action = findClosestAction(inputs, ActionType.values());
+        }
+        if (object == null) {
+            object = findClosestAction(inputs, ObjectType.values());
+        }
+        if (amountInput == -1) {
+            amount = isInteger(inputs);
+        }
+        if(action == null && object == ObjectType.HELP){
+            return new PlayerAction(ActionType.UNKNOWN,this);
+        }
 
         Action performedAction;
-        if (action!= null){
+        if (action != null) {
             performedAction = getActionFromEnum(action);
-            if(object != null){
-                if(performedAction.getObject().name().equals(object.name())){
+            if (object != null) {
+                if (performedAction.getObject().equals(object)) {
                     performedAction.setAmount(amount);
                     return performedAction;
                 }
-            }
-            else{
+            } else {
                 performedAction.setObject(null);
                 performedAction.setAmount(amount);
                 return performedAction;
@@ -85,95 +85,83 @@ public class InputAnalyzer {
         }
         return null;
     }
-    public static Enum findClosestAction(String[] inputs, Enum[] list){
+
+    public Enum findClosestAction(String[] inputs, Enum[] list) {
         Enum closestType = null;
-        for (String input:inputs){
-            for(Enum type: list){
-                if (input.equalsIgnoreCase(type.toString())){
+        for (String input : inputs) {
+            for (Enum type : list) {
+                if (input.equalsIgnoreCase(type.toString())) {
                     return type;
-                }
-                else if (input.toLowerCase().contains(type.toString().toLowerCase())){
+                } else if (input.toLowerCase().contains(type.toString().toLowerCase())) {
                     closestType = type;
                 }
             }
         }
+        /*if (closestType == null) {
+            return getClosest(inputs, list);
+        }*/
         return closestType;
     }
-    public static int isInteger(String[] inputs){
+
+    public int isInteger(String[] inputs) {
         int result = -1;
-        for (String input: inputs){
-            for (Map.Entry<String,Integer> set: stringIntegerHashMap.entrySet()){
-                if(input.equals(set.getKey())){
+        for (String input : inputs) {
+            for (Map.Entry<String, Integer> set : stringIntegerHashMap.entrySet()) {
+                if (input.equals(set.getKey())) {
                     return set.getValue();
                 }
             }
-            try{
+            try {
                 return Integer.parseInt(input);
-            }
-            catch (Exception ignore){
+            } catch (Exception ignore) {
             }
 
 
         }
         return result;
     }
-    public static Action getActionFromEnum(Enum type) {
+
+    public Action getActionFromEnum(Enum type) {
         switch (type) {
             case ActionType.CHOP -> {
-                return new ChopWood();
+                return new ChopWood(amount, this);
             }
-            case ActionType.VIEWINVENTORY -> {
-                return new PlayerAction(ActionType.VIEWINVENTORY);
+            case ActionType.INVENTORY -> {
+                return new PlayerAction(ActionType.INVENTORY,this);
             }
             case ActionType.MINE -> {
-                return new MineStone();
+                return new MineStone((ObjectType) object, amount, this);
             }
             case ActionType.CRAFT -> {
-                return new Craft();
+                return new Craft((ObjectType) object, amount, player, this);
             }
-            case ActionType.SLEEP -> {
-                return new PlayerAction(ActionType.SLEEP);
-
+            case ActionType.SLEEP, ActionType.DIE-> {
+                return new PlayerAction((ActionType) type,this);
             }
-            case ActionType.HELP -> {
-               return new PlayerAction(ActionType.HELP);
+            case ActionType.RECIPE -> {
+                PlayerAction action = new PlayerAction(ActionType.RECIPE,this);
+                action.setObject((ObjectType) object);
+                return action;
             }
             default -> {
                 System.out.println("Unknown command");
                 System.out.println("please enter a valid action");
             }
+
         }
         return null;
     }
-    public static ActionType getClosest(String input, ActionType etype) {
-        input = input.toLowerCase();
-        ActionType closest = null;
-        for (Map.Entry<ActionType, List<String>> set : actionNames.entrySet()) {
-            for (String similar : set.getValue()) {
-                if (similar.equals(input)) {
-                    return set.getKey();
-                }
-                if (input.contains(similar)) {
-                    closest = set.getKey();
+
+    public Enum getClosest(String[] inputs, Enum[] types) {
+        for (String input : inputs) {
+            for (Enum type : types) {
+                for (String similar: similarNames.get(type)){
+                    if (input.toLowerCase().contains(similar.toLowerCase())) {
+                        return type;
+                    }
                 }
             }
         }
-        return closest;
-    }
-    public String recipeToString(ObjectType object) {
-        StringBuilder stringBuilder = new StringBuilder();
-        HashMap<ObjectType,Integer> recipe = objectCrafting.get(object);
-        if (recipe != null) {
-            for (Map.Entry<ObjectType, Integer> set :
-                    recipe.entrySet()) {
-                stringBuilder.append(set.getKey()).append(" = ").append(set.getValue());
-                stringBuilder.append('\n');
-            }
-            return stringBuilder.toString();
-        }
-        return "This item cannot be crafted";
-    }
-    public static HashMap<ObjectType,Integer> getCraftingRecipe(ObjectType object){
-        return objectCrafting.get(object);
+        return null;
     }
 }

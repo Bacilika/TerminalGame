@@ -4,8 +4,6 @@ import com.bacilika.ObjectType;
 import com.bacilika.Player;
 
 public interface Action {
-
-    ActionType getName();
     ObjectType getObject();
 
     int getAmount();
@@ -14,5 +12,7 @@ public interface Action {
 
     void setObject(ObjectType type);
 
-    int performAction(int amount, ObjectType tool);
+    int performAction(int amount, ObjectType objectType, ObjectType tool);
+
+    void printHelp();
 }
