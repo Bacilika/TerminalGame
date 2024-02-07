@@ -16,7 +16,7 @@ public class Game {
     private final InputAnalyzer analyzer;
     public Game(){
         scanner = new Scanner(System.in);
-        System.out.println("Hello and welcome to this game!");
+        System.out.println("Hello and welcome! Your goal is to reach the end by ...");
         System.out.print("What is your name? ");
         String name = scanner.nextLine();
         while(name.isEmpty() ){
@@ -25,7 +25,9 @@ public class Game {
         };
         player = new Player(name);
         analyzer = new InputAnalyzer(player);
-        System.out.println("Here you can type whatever you want to do, try the command, chop wood, or type help for help");
+        System.out.println("Write whatever you'd like to do, you can do things like " +
+                "chop wood or mine stone. For general help type 'help' or type " +
+                "'[action] help' for help on how to perform the action");
         while (isRunning) {
             selectAction();
         }

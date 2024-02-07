@@ -13,7 +13,6 @@ public class Player {
     private int energy;
     private final Map<ObjectType,Integer> inventory;
 
-
     public Player(String name){
         this.name= name;
         inventory = new HashMap<>();
@@ -53,6 +52,12 @@ public class Player {
     public void die(){
         System.out.println("player died");
         System.exit(0);
+    }
+
+    void printPlayerUI(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(String.copyValueOf(new char[]{'-'},0,20));
+        System.out.println(stringBuilder);
     }
 
 

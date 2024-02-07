@@ -5,6 +5,9 @@ import com.bacilika.InputAnalyzer;
 import com.bacilika.ObjectType;
 import com.bacilika.Player;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class AbstractAction implements Action {
     protected ActionType actionType;
     protected ObjectType collectedObject;
@@ -45,7 +48,6 @@ public abstract class AbstractAction implements Action {
         // if no object specified
         if(collectedObject == null) {
             System.out.println("what would you like to " + actionType.toString().toLowerCase());
-
             a = analyzer.analyzeInput(Game.scanner.nextLine(),actionType,null,objectAmount);
 
             while (a.getObject() == null) {
@@ -54,12 +56,17 @@ public abstract class AbstractAction implements Action {
             }
             collectedObject = a.getObject();
         }
+        ObjectType required = player.checkInventory(requiredTool) > 0 ? requiredTool :  null;
+
+        if(objectAmount == 0){
+            performAction(0,collectedObject,required);
+        }
 
 
         // if no amount specified
         if(objectAmount == -1){
             if(a == null){
-                System.out.println("how many " + collectedObject.toString() + " would you like?");
+                System.out.println("how many " + collectedObject + " would you like?");
                 a = analyzer.analyzeInput(Game.scanner.nextLine(),actionType,collectedObject,objectAmount);
             }
 
@@ -91,6 +98,10 @@ public abstract class AbstractAction implements Action {
                         actionType.toString() + " " + collectedObject.toString());
                 return;
             }
+            if(retrivedItems == -1){
+                printItemAmount();
+                return;
+            }
 
             else if(retrivedItems < objectAmount){
                 System.out.println("You don't have a " + requiredTool + " so you could only get " +retrivedItems + " " +
@@ -105,5 +116,28 @@ public abstract class AbstractAction implements Action {
     @Override
     public void setObject(ObjectType type){
         this.collectedObject = type;
+    }
+    private void printItemAmount(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("You need: \n");
+        for (Map.Entry<ObjectType, Integer> set : collectedObject.getCrafting().entrySet()) {
+            stringBuilder.append(set.getValue()*objectAmount).append(" ").append(set.getKey());
+            if(set.getValue() > 1){
+                stringBuilder.append("s");
+            }
+            stringBuilder.append("\n");
+        }
+        stringBuilder.append("you have: \n");
+        for (Map.Entry<ObjectType, Integer> set : collectedObject.getCrafting().entrySet()) {
+            stringBuilder.append(player.checkInventory(set.getKey())).append(" ").append(set.getKey());
+            if(set.getValue() > 1){
+                stringBuilder.append("s");
+            }
+            stringBuilder.append("\n");
+        }
+        System.out.println(stringBuilder);
+    }
+    protected void setPlayer(Player p){
+        this.player = p;
     }
 }

@@ -12,7 +12,6 @@ import java.util.Map;
 
 public class Craft extends AbstractAction{
 
-    private final Player player;
 
     public Craft(ObjectType craftedObject, int amountToCraft,Player player,InputAnalyzer analyzer){
         super(ActionType.CRAFT,craftedObject,craftedObject.getRequiredTool(),amountToCraft,analyzer);
@@ -20,11 +19,24 @@ public class Craft extends AbstractAction{
     }
     @Override
     public int performAction(int amount, ObjectType craftedObject, ObjectType requiredTool) {
-        for (Map.Entry<ObjectType, Integer> set :
-            getCraftingRecipe(craftedObject).entrySet()) {
-            player.removeFromInventory(set.getKey(), set.getValue());
+        if (canAfford(craftedObject,amount)){
+            for (Map.Entry<ObjectType, Integer> set :
+                    getCraftingRecipe(craftedObject).entrySet()) {
+                player.removeFromInventory(set.getKey(), set.getValue());
+            }
+            return amount;
         }
-        return 1;
+            return -1;
+    }
+    private boolean canAfford(ObjectType objectType, int amount){
+        for (Map.Entry<ObjectType, Integer> set :
+                getCraftingRecipe(objectType).entrySet()) {
+            if(player.checkInventory(set.getKey()) < set.getValue()*amount){
+                return false;
+            }
+
+        }
+        return true;
     }
 
     @Override

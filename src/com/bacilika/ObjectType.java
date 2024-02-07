@@ -6,8 +6,15 @@ import java.util.List;
 import java.util.Map;
 
 public enum ObjectType {
-    WOOD(null,null),
-    STONE(null,null), AXE(new HashMap<>() {{
+    MOUNTAINS,
+    FOREST,
+    BEACH,
+    CAVE,
+    WOOD,
+    STONE,
+    HELP,
+    ALL,
+    AXE(new HashMap<>() {{
         put(ObjectType.WOOD, 2);
     }},null),
     HOUSE(new HashMap<>() {{
@@ -16,15 +23,15 @@ public enum ObjectType {
     }},null),
     PICKAXE(new HashMap<>() {{
         put(ObjectType.WOOD, 5);
-    }},null),
-
-    HELP(null,null),
-    ALL(null,null);
+    }},null);
     private ObjectType requiredTool;
     private HashMap<ObjectType,Integer> crafting;
     ObjectType(HashMap<ObjectType, Integer> crafting, ObjectType requiredTool){
         this.crafting = crafting;
         this.requiredTool = requiredTool;
+
+    }
+    ObjectType(){
 
     }
     @Override

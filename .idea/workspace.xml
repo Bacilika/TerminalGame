@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dc67fba-82bc-4095-b884-839bd1ea9937" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/bacilika/Action/Explore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hello/com/bacilika/Action/AbstractAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hello/com/bacilika/Action/AbstractAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hello/com/bacilika/Action/Craft.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hello/com/bacilika/Action/Craft.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hello/com/bacilika/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hello/com/bacilika/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bacilika/Action/ActionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bacilika/Action/ActionType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bacilika/Action/Craft.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bacilika/Action/Craft.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bacilika/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bacilika/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bacilika/ObjectType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bacilika/ObjectType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bacilika/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bacilika/Player.java" afterDir="false" />
+    <list default="true" id="6dc67fba-82bc-4095-b884-839bd1ea9937" name="Changes" comment="&quot;adding xml&quot;">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +22,20 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Bacilika&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="e599bc36-b37c-42f7-bb43-f37fd3f0788e" />
+        <option name="url" value="https://github.com/Bacilika/TerminalGame.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -41,21 +47,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.PlayGame.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/lunas/Documents/MovingFrames",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.PlayGame.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/lunas/Documents/MovingFrames&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="PlayGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.bacilika.PlayGame" />
@@ -96,10 +104,35 @@
       <workItem from="1707237068305" duration="3270000" />
       <workItem from="1707325386773" duration="904000" />
       <workItem from="1707327519617" duration="1713000" />
+      <workItem from="1707332153276" duration="200000" />
+      <workItem from="1707332360016" duration="769000" />
     </task>
+    <task id="LOCAL−00001" summary="&quot;adding xml&quot;">
+      <option name="closed" value="true" />
+      <created>1707332224103</created>
+      <option name="number" value="LOCAL−00001" />
+      <option name="presentableId" value="LOCAL−00001" />
+      <updated>1707332224103</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="&quot;adding xml&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;adding xml&quot;" />
   </component>
 </project>
