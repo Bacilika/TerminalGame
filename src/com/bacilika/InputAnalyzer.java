@@ -10,18 +10,11 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class InputAnalyzer {
-<<<<<<< Updated upstream
 
     private static ActionType action;
     private static ObjectType object;
     private static int amount;
     private final Player player;
-=======
-    private Enum action;
-    private Enum object;
-    private int amount;
-    private Player player;
->>>>>>> Stashed changes
     public Map<String, Integer> stringIntegerHashMap = new HashMap<>() {{
         put("one", 1);
         put("two", 2);
