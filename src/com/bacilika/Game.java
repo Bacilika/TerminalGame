@@ -19,7 +19,7 @@ public class Game {
         System.out.println("Hello and welcome to this game!");
         System.out.print("What is your name? ");
         String name = scanner.nextLine();
-        while(name.isEmpty()){
+        while(name.isEmpty() ){
             System.out.println("you need to have a name, enter a name");
             name =scanner.nextLine();
         };

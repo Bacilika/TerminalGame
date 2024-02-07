@@ -11,10 +11,10 @@ import java.util.function.Function;
 
 public class InputAnalyzer {
 
-    private static Enum action;
-    private static Enum object;
+    private static ActionType action;
+    private static ObjectType object;
     private static int amount;
-    private Player player;
+    private final Player player;
     public Map<String, Integer> stringIntegerHashMap = new HashMap<>() {{
         put("one", 1);
         put("two", 2);
@@ -57,10 +57,10 @@ public class InputAnalyzer {
         amount = amountInput;
 
         if (action == null) {
-            action = findClosestAction(inputs, ActionType.values());
+            action = (ActionType) findClosestAction(inputs, ActionType.values());
         }
         if (object == null) {
-            object = findClosestAction(inputs, ObjectType.values());
+            object = (ObjectType) findClosestAction(inputs, ObjectType.values());
         }
         if (amountInput == -1) {
             amount = isInteger(inputs);

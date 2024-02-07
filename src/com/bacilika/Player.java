@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class Player {
     private String name;
+    private int energy;
     private final Map<ObjectType,Integer> inventory;
 
 
@@ -17,6 +18,7 @@ public class Player {
         this.name= name;
         inventory = new HashMap<>();
         System.out.println("Hello "+ name);
+        energy = 20;
     }
     public int checkInventory(ObjectType item){
 
@@ -38,27 +40,17 @@ public class Player {
         else
             inventory.replace(objectType,inventory.get(objectType)+amount);
     }
-
-    public Map<ObjectType, Integer> getInventory() {
-        return inventory;
-    }
     public void removeFromInventory(ObjectType type, int amount){
         inventory.replace(type,inventory.get(type)-amount);
         if (inventory.get(type) == 0){
             inventory.remove(type);
         }
     }
-
-    public String getName() {
-        return name;
-    }
     public void sleep(){
-
         System.out.println("Player went to bed");
         System.exit(0);
     }
     public void die(){
-
         System.out.println("player died");
         System.exit(0);
     }
